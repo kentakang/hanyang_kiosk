@@ -35,6 +35,16 @@ const createWindow = () => {
   if (!quit || !devTools) {
     dialog.showErrorBox('hanyang_kiosk', '단축키 등록에 실패했습니다, 관리자에게 문의 바랍니다.');
   }
+
+  const { powerMonitor } = require('electron');
+
+  setInterval(() => {
+    powerMonitor.querySystemIdleTime(time => {
+      if (time > 60) {
+        win.webContents.send('goSplash');
+      }
+    });
+  }, 10000);
 };
 
 const checkScreenRotate = () => {
