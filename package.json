@@ -2,24 +2,71 @@
   "name": "hanyang_kiosk",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "charset": "^1.0.1",
+    "cross-env": "^5.2.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "iconv-lite": "^0.4.24",
+    "material-ui-upload": "^1.2.1",
+    "nedb": "^1.8.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-html-parser": "^2.0.2",
+    "react-images-upload": "^1.2.6",
+    "react-live-clock": "^3.1.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "react-swipeable-views": "^0.13.1",
+    "request": "^2.88.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start-react": "cross-env BROWSER=none react-scripts start",
+    "start-electron": "cross-env NODE_ENV=development electron .",
+    "start": "concurrently \"yarn start-react\" \"wait-on http://localhost:3000/ && yarn start-electron\"",
+    "build:react": "react-scripts build",
+    "build:electron": "cross-env NODE_ENV=production electron-builder",
+    "build": "yarn build:react && yarn build:electron",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "airbnb",
+      "prettier"
+    ],
+    "rules": {
+      "react/prefer-stateless-function": 0,
+      "react/jsx-filename-extension": 0,
+      "react/jsx-one-expression-per-line": 0
+    },
+    "env": {
+      "browser": true
+    }
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@rescripts/cli": "^0.0.10",
+    "@rescripts/rescript-env": "^0.0.10",
+    "concurrently": "^4.1.0",
+    "electron-builder": "^20.39.0",
+    "wait-on": "^3.2.0",
+    "electron": "^4.1.4"
+  },
+  "build": {
+    "appId": "com.kentakang.hanyang-kiosk",
+    "productName": "Hanyang Kiosk",
+    "copyright": "Copyright by 2019 kentkang"
+  }
 }
