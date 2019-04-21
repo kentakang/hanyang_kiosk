@@ -138,6 +138,9 @@ const Teachers = withRouter(({history}) => {
             }
           </div>
         </CardContent>
+        <div style={{position: 'relative', left: 0, bottom: 80, width: '100%', height: 80, textAlign: 'center', backgroundColor: '#ffffff' }}>
+          <h2>제작 : 컴퓨터네트워크과 강찬</h2>
+        </div>
       </Card>
     </MuiThemeProvider>
   );
