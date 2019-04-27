@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -340,6 +341,10 @@ const Map = ({ match }) => {
       </Card>
     </MuiThemeProvider>
   );
+};
+
+Map.propTypes = {
+  match: PropTypes.shape.isRequired,
 };
 
 export default Map;
