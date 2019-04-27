@@ -9,7 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const { remote, ipcRenderer } = window.require('electron');
 const Datastore = require('nedb');
@@ -58,22 +58,24 @@ const teacherCardTheme = createMuiTheme({
 const TeacherCard = ({row}) => {
   return (
     <MuiThemeProvider theme={teacherCardTheme}>
-      <Card key={row._id}>
-        <CardMedia
-          image={`data:image/jpg;base64,${row.profile}`}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {row.name}
-          </Typography>
-          <Typography component="p">
-            부서 : {row.department}
-          </Typography>
-          <Typography component="p">
-            위치 : {row.location}
-          </Typography>
-        </CardContent>
-      </Card>
+      <Link to={`/main/map/${row.location}`} style={{ textDecoration: 'none' }}>
+        <Card key={row._id}>
+          <CardMedia
+            image={`data:image/jpg;base64,${row.profile}`}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {row.name}
+            </Typography>
+            <Typography component="p">
+              부서 : {row.department}
+            </Typography>
+            <Typography component="p">
+              위치 : {row.location}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Link>
     </MuiThemeProvider>
   );
 };
