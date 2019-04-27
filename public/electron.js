@@ -13,7 +13,7 @@ const isDev = process.env.NODE_ENV === 'development';
 let win;
 
 const createWindow = () => {
-  win = new BrowserWindow({ width: 1280, height: 1024, kiosk: false, 'fullscreen': false, 'frame': true, webPreferences: { nodeIntegration: true } });
+  win = new BrowserWindow({ width: 1080, height: 1920, kiosk: true, 'fullscreen': true, 'frame': false, webPreferences: { nodeIntegration: true } });
 
   win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '/../build/index.html')}`);
 
