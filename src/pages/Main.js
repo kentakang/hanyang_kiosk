@@ -8,12 +8,14 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/People';
 import WorkIcon from '@material-ui/icons/Work';
+import MapIcon from '@material-ui/icons/Map';
 import Clock from 'react-live-clock';
 import Logo from '../assets/images/logo.png';
 import Home from './Home';
 import News from './News';
 import Teachers from './Teachers';
 import Status from './Status';
+import Map from './Map';
 import { configTeachers, configStatus } from './Config';
 
 const Main = ({match}) => {
@@ -47,6 +49,8 @@ const Main = ({match}) => {
         <Route exact path={match.url} render={() => (<Home />)} />
         <Route path={`${match.url}/teachers`} render={() => (<Teachers />)} />
         <Route path={`${match.url}/status`} render={() => (<Status />)} />
+        <Route exact path={`${match.url}/map`} component={Map} />
+        <Route path={`${match.url}/map/:location`} component={Map} />
         <Route path={`${match.url}/news/:idx`} component={News} />
         <Route path={`${match.url}/config/teachers`} component={configTeachers} />
         <Route path={`${match.url}/config/status`} component={configStatus} />
@@ -60,6 +64,7 @@ const Main = ({match}) => {
         <BottomNavigationAction label="홈" icon={<HomeIcon />} className="bottomAction" component={Link} to="/main" />
         <BottomNavigationAction label="선생님" icon={<PeopleIcon />} className="bottomAction" component={Link} to="/main/teachers" />
         <BottomNavigationAction label="진학현황" icon={<WorkIcon />} className="bottomAction" component={Link} to="/main/status" />
+        <BottomNavigationAction label="내부 지도" icon={<MapIcon />} className="bottomAction" component={Link} to="/main/map" />
       </BottomNavigation>
     </div>
   );

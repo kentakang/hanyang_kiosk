@@ -176,3 +176,256 @@ html, body {
   flex: 1;
   margin: 25px 0;
 }
+
+.main {
+	position: fixed;
+	top: 0;
+	left: 100;
+	width: 1400px;
+	height: 100%;
+}
+
+.mall {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	-webkit-perspective: 3500px;
+	perspective: 3500px;
+	-webkit-perspective-origin: 0% 50%;
+	perspective-origin: 0% 50%;
+	-webkit-transition: -webkit-transform 0.8s;
+	transition: transform 0.8s;
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.mall.mall--content-open {
+	-webkit-transform: translate3d(0,-25%,0) scale3d(0.8,0.8,1);
+	transform: translate3d(0,-25%,0) scale3d(0.8,0.8,1);
+}
+
+.levels {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+.levels {
+	width: 96vmin;
+	height: 28vmin;
+	margin: -12vmin 0 0 -64vmin;
+	-webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.levels {
+	-webkit-transform: rotateX(70deg) rotateZ(-45deg) translateZ(-15vmin);
+	transform: rotateX(70deg) rotateZ(-45deg) translateZ(-15vmin);
+}
+
+.level {
+	position: relative;
+	width: 96vmin;
+	height: 28vmin;
+	cursor: pointer;
+	pointer-events: auto;
+	-webkit-transition: opacity 1s, -webkit-transform 1s;
+	transition: opacity 1s, transform 1s;
+	-webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.level::after {
+	font-size: 2.5vmin;
+	line-height: 0;
+	position: absolute;
+	z-index: 100;
+	top: -0.5em;
+  left: 1em;
+  white-space: nowrap;
+  transform: rotateX(90deg) rotateZ(180deg) rotateY(180deg) translateZ(-20px);
+}
+
+.level:hover::after,
+.level--current::after {
+	color: #515158;
+}
+
+.level--1::after {
+	content: '1층';
+}
+
+.level--2::after {
+	content: '2층';
+}
+
+.level--3::after {
+	content: '3층';
+}
+
+.level--4::after {
+	content: '4층';
+}
+
+.level--5::after {
+  content: '5층';
+}
+
+.level:not(:first-child) {
+	position: absolute;
+	top: 0;
+  left: 0;
+}
+
+.level--2 {
+	transform: translateZ(12vmin);
+}
+
+.level--3 {
+	transform: translateZ(24vmin);
+}
+
+.level--4 {
+	transform: translateZ(36vmin);
+}
+
+.level--5 {
+  transform: translateZ(48vmin);
+}
+
+
+/* Selection transitions */
+
+.levels--selected-1 .level:not(.level--1),
+.levels--selected-2 .level:not(.level--2),
+.levels--selected-3 .level:not(.level--3),
+.levels--selected-4 .level:not(.level--4),
+.levels--selected-5 .level:not(.level--5) {
+  opacity: 0;
+  pointer-events: none;
+	/* fade out all others */
+}
+
+.levels--selected-2 .level--1,
+.levels--selected-3 .level--1,
+.levels--selected-4 .level--1,
+.levels--selected-3 .level--2,
+.levels--selected-4 .level--2,
+.levels--selected-4 .level--3,
+.levels--selected-5 .level--2,
+.levels--selected-5 .level--3,
+.levels--selected-5 .level--4 {
+	-webkit-transform: translateZ(-60vmin);
+  transform: translateZ(-60vmin);
+}
+
+.levels--selected-2 .level--3,
+.levels--selected-2 .level--4,
+.levels--selected-2 .level--5,
+.levels--selected-3 .level--4,
+.levels--selected-3 .level--5,
+.levels--selected-4 .level--5 {
+  transform: translateZ(60vmin);
+}
+
+/* Delays */
+/* 1 */
+
+.levels--selected-1 .level--3,
+.levels--selected-2 .level--3,
+.levels--selected-3 .level--2,
+.levels--selected-4 .level--2
+.levels--selected-5 .level--1 {
+	-webkit-transition-delay: 0.1s;
+	transition-delay: 0.1s;
+}
+
+.levels--selected-1 .level--2,
+.levels--selected-2 .level--current,
+.levels--selected-2 .level--current::after,
+.levels--selected-3 .level--current,
+.levels--selected-3 .level--current::after,
+.levels--selected-4 .level--3
+.levels--selected-5 .level--4 {
+	-webkit-transition-delay: 0.25s;
+	transition-delay: 0.25s;
+}
+
+.levels--selected-1 .level--current,
+.levels--selected-1 .level--current::after,
+.levels--selected-5 .level--current,
+.levels--selected-5 .level--current::after {
+	-webkit-transition-delay: 0.45s;
+	transition-delay: 0.45s;
+}
+
+/* Current level */
+
+.level.level--current {
+  transform: rotateZ(45deg) rotateX(-70deg) translateZ(5vmin) translateX(-15vmin);
+  width: 80%;
+  margin-left: 25vmin;
+}
+
+.level.level--current::after {
+  transform: rotateX(180deg) rotateZ(180deg) rotateY(180deg) translateZ(-20px);
+}
+
+/* Navigation classes */
+.levels--open .level,
+.levels--open .level::after {
+	-webkit-transition: -webkit-transform 1s, opacity 1s;
+	transition: transform 1s, opacity 1s;
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+}
+
+.levels--open .level.level--current {
+	opacity: 1;
+}
+
+.levels--open .level.level--moveOutUp,
+.levels--open .level.level--moveOutDown {
+	opacity: 0;
+}
+
+.levels--open .level.level--moveOutUp {
+	-webkit-transform: translateZ(90vmin);
+	transform: translateZ(90vmin);
+}
+
+.levels--open .level.level--moveOutDown {
+	-webkit-transform: translateZ(-60vmin);
+	transform: translateZ(-60vmin);
+}
+
+.map__ground {
+	fill: #d7d7dc;
+	stroke: #bbb;
+	stroke-width: 5;
+}
+
+.map__space {
+	-webkit-transition: fill-opacity 0.8s;
+	transition: fill-opacity 0.8s;
+	fill: #bdbdbd;
+	fill-opacity: 0.6;
+}
+
+.level--current .map__space {
+	fill-opacity: 1;
+}
+
+.map__space--selected {
+animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0% {fill: #d7d7dc;}
+  50% {fill: #a4a4a4;}
+}
