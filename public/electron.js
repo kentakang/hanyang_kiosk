@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+/* eslint-disable import/no-extraneous-dependencies */
 const electron = require('electron');
 const { app, BrowserWindow, globalShortcut, dialog, ipcMain } = require('electron');
 const path = require('path');
@@ -11,7 +13,7 @@ const isDev = process.env.NODE_ENV === 'development';
 let win;
 
 const createWindow = () => {
-  win = new BrowserWindow({ width: 1920, height: 1080, kiosk: true, 'fullscreen': true, 'frame': false });
+  win = new BrowserWindow({ width: 1280, height: 1024, kiosk: false, 'fullscreen': false, 'frame': true, webPreferences: { nodeIntegration: true } });
 
   win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '/../build/index.html')}`);
 
